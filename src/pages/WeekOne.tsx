@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Grid, Card, Button, Checkbox, Slider, Text } from '@mantine/core';
 
+
 const WeekOne: React.FC = () => {
 
     const [password, setPassword] = useState<string>('')

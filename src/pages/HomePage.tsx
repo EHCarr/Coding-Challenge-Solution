@@ -4,7 +4,7 @@ import { Grid, Container, Text } from '@mantine/core';
 
 const HomePage: React.FC = () => {
   const weeks = [
-    { weekNumber: 1, title: 'Password Generator', status: 'done', link: '/week1' },
+    { weekNumber: 1, title: 'Password Generator', status: 'done', link: '/week1' }, { weekNumber: 2, title: 'Tic-Tac-Toe', status: 'in progress', link: '/week2'}
   ];
 
   return (

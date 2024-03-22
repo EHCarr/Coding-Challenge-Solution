@@ -1,9 +1,20 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import user from '@testing-library/user-event';
 import App from './App';
 
-test('renders learn react link', () => {
+test ('password minimum length set by default', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  
+});
+
+test ('if no categories are selected, display error', async () => {
+  render(<App />);
+
+
+})
+
+test ('password is displayed to user after button click', async () => {
+  render(<App />);
+
+ 
 });
