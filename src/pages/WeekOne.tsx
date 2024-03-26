@@ -3,7 +3,7 @@ import { Container, Grid, Card, Button, Checkbox, Slider, Text } from '@mantine/
 
 
 const WeekOne: React.FC = () => {
-
+    
     const [password, setPassword] = useState<string>('')
     const [isError, setIsError] = useState<boolean>(false)
     const [errorMessage, setErrorMessage] = useState<string>('')
