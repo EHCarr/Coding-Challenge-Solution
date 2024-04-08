@@ -65,7 +65,7 @@ function Board() {
             {winner && winner === "TIE" && <p>Its a Tie, better luck next time</p>}
 
         <div className="grid">
-            {Array(9)
+            {/* {Array(9)
             .fill(null)
             .map((_, i) => {
                 return (
@@ -76,7 +76,7 @@ function Board() {
                 value={squares[i]}
                 />
                 );
-        })}
+        })} */}
         </div>
         <button className='rest' onClick={reset}>RESET</button>
         </div>
