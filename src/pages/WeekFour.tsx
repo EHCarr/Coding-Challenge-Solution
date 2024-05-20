@@ -1,12 +1,10 @@
 import { useState } from 'react';
 
-
-
-const GameColumn = ({column, index, onClick}) => {
+const GameColumn = ( { column, index, onClick } ) => {
     return (
-        <div className='column' key={index} onClick={onClick}>
+        <div className='column' key={`column-${index}`} onClick={onClick}>
             {column.map((cell, x) => {
-                return <span className='cell' key={x}>{cell}</span>
+                return <span className='cell' key={`cell${index}-${x}`}>{cell}</span>
             })}
         <style jsx>{`
         .column {
@@ -33,23 +31,24 @@ const playerTwo = "🔴"
 
 
 const WeekFour = () => {
-    
-    let start = [];
+    let start = {};
     for (let col = 0;  col < 7; col++) {
-        start[col] = ([null, null, null, null, null, null]);
+        start[col] = [null, null, null, null, null, null];
     }
 
     const [gameState, setGameState] = useState(start);
+    const [winner, setWinner] = useState(null);
     const [currentPlayer, setCurrentPlayer] = useState(playerOne);
 
-    const gameOver = () => {
+    const gameOver = (currentPlayer) => {
+        let column; 
 
         for(let x = 0; x < 7; x++) {
             for(let y = 0; y < 6 - 3; y++){
                 if(gameState[x][y] != null &&
                 gameState[x][y] == gameState[x][y+1] && 
-                gameState[x][y] == gameState[x][y+2] &&
-                gameState[x][y]== gameState[x][y+3]
+                gameState[x][y+1] == gameState[x][y+2] &&
+                gameState[x][y+2]== gameState[x][y+3]
                 )
                 return true 
             }
@@ -60,24 +59,38 @@ const WeekFour = () => {
             for(let y = 0; y < 6; y++){
                 if(gameState[x][y] != null &&
                 gameState[x][y] == gameState[x][y+1] && 
-                gameState[x][y] == gameState[x][y+2] &&
-                gameState[x][y]== gameState[x][y+3]
-                )
-                return true 
+                gameState[x][y+1] == gameState[x][y+2] &&
+                gameState[x][y+1]== gameState[x][y+3]
+                ) {
+                    return true 
+                }
             }
+        }
 
+        for(let x = 0; x < 7; x++) {
+            for(let y = 0; y < 6; y++){
+                if(gameState[x][y] != null &&
+                gameState[x][y] == gameState[x+1][y+1] && 
+                gameState[x+1][y] == gameState[x+2][y+2] &&
+                gameState[x+2][y]== gameState[x+3][y+3]
+                ) {
+                return true
+                }
+            }
         }
 
         for(let x = 0; x < 7; x++) {
             for(let y = 5; y >= 3; y--){
                 if(gameState[x][y] != null &&
                 gameState[x][y] == gameState[x+1][y-1] && 
-                gameState[x][y] == gameState[x+2][y-2] &&
-                gameState[x][y]== gameState[x+3][y-3]
-                )
-                return true        
+                gameState[x+1][y-1] == gameState[x+2][y-2] &&
+                gameState[x+2][y-2]== gameState[x+3][y-3]
+                ) {
+                    return true        
+                }
+            }  
         }
-       return false 
+        return false
     };
 
     const addPiece = (columnIndex) => {
@@ -91,28 +104,28 @@ const WeekFour = () => {
 
         if(gameOver(currentPlayer)) {
             setWinner(currentPlayer)
-            alert("game over");
         }
         setCurrentPlayer(currentPlayer === playerOne ? playerTwo : playerOne)
     }
 
-    
+        
     return (
-        <div className="board">
+            <div className="board">
+                <div>{winner && <h1>{winner} is the winner</h1>}</div>
+                Current player is {currentPlayer}.
+                {Object.entries(gameState).map(([k,column], x) => {
+                    return <GameColumn column={column} index={x} onClick={() => addPiece(x)} />;
+                })}
+                <style jsx>{`
+                    .board {
+                        display: flex;
+                        flex: 1;
+                    }
+               `}</style>
+            </div>      
+        );
+    }
 
-            {Object.entries(gameState).map(([k,column], x) => {
-                return <GameColumn column={column} index={x} onClick={() => addPiece(x)} />;
-            })}
-            <style jsx>{`
-                .board {
-                    display: flex;
-                    flex: 1;
-                }
-           `}</style>
-        </div>
-            
-    );
-}
 
 
 export default WeekFour;
