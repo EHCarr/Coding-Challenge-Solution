@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import { Button } from '@mantine/core';
 
-const GameColumn = ( { column, index, onClick } ) => {
+const GameColumn = ( { column, index, onClick }: any ) => {
     return (
         <div className='column' key={`column-${index}`} onClick={onClick}>
-            {column.map((cell, x) => {
+            {column.map((cell: any, x: any)  => {
                 return <span className='cell' key={`cell${index}-${x}`}>{cell}</span>
             })}
-        <style jsx>{`
+        <style>{`
         .column {
             display: flex;
             flex-direction: column-reverse;
@@ -31,24 +32,28 @@ const playerTwo = "🔴"
 
 
 const WeekFour = () => {
-    let start = {};
-    for (let col = 0;  col < 7; col++) {
-        start[col] = [null, null, null, null, null, null];
+    // Define a type with an index signature
+    let start: { [key: number]: (null | any)[] } = {};
+
+// Use a number type for the loop variable
+    for (let col: number = 0; col < 7; col++) {
+    start[col] = [null, null, null, null, null, null];
     }
 
+
+
     const [gameState, setGameState] = useState(start);
-    const [winner, setWinner] = useState(null);
+    const [winner, setWinner] = useState<any>(null);
     const [currentPlayer, setCurrentPlayer] = useState(playerOne);
 
-    const gameOver = (currentPlayer) => {
-        let column; 
+    const gameOver = (currentPlayer: string) => {
 
         for(let x = 0; x < 7; x++) {
             for(let y = 0; y < 6 - 3; y++){
                 if(gameState[x][y] != null &&
-                gameState[x][y] == gameState[x][y+1] && 
-                gameState[x][y+1] == gameState[x][y+2] &&
-                gameState[x][y+2]== gameState[x][y+3]
+                gameState[x][y] === gameState[x][y+1] && 
+                gameState[x][y+1] === gameState[x][y+2] &&
+                gameState[x][y+2] === gameState[x][y+3]
                 )
                 return true 
             }
@@ -58,9 +63,9 @@ const WeekFour = () => {
         for(let x = 0; x < 7 -3; x++) {
             for(let y = 0; y < 6; y++){
                 if(gameState[x][y] != null &&
-                gameState[x][y] == gameState[x][y+1] && 
-                gameState[x][y+1] == gameState[x][y+2] &&
-                gameState[x][y+1]== gameState[x][y+3]
+                gameState[x][y] === gameState[x][y+1] && 
+                gameState[x][y+1] === gameState[x][y+2] &&
+                gameState[x][y+1]=== gameState[x][y+3]
                 ) {
                     return true 
                 }
@@ -70,9 +75,9 @@ const WeekFour = () => {
         for(let x = 0; x < 7; x++) {
             for(let y = 0; y < 6; y++){
                 if(gameState[x][y] != null &&
-                gameState[x][y] == gameState[x+1][y+1] && 
-                gameState[x+1][y] == gameState[x+2][y+2] &&
-                gameState[x+2][y]== gameState[x+3][y+3]
+                gameState[x][y] === gameState[x+1][y+1] && 
+                gameState[x+1][y] === gameState[x+2][y+2] &&
+                gameState[x+2][y] === gameState[x+3][y+3]
                 ) {
                 return true
                 }
@@ -82,9 +87,9 @@ const WeekFour = () => {
         for(let x = 0; x < 7; x++) {
             for(let y = 5; y >= 3; y--){
                 if(gameState[x][y] != null &&
-                gameState[x][y] == gameState[x+1][y-1] && 
-                gameState[x+1][y-1] == gameState[x+2][y-2] &&
-                gameState[x+2][y-2]== gameState[x+3][y-3]
+                gameState[x][y] === gameState[x+1][y-1] && 
+                gameState[x+1][y-1] === gameState[x+2][y-2] &&
+                gameState[x+2][y-2] === gameState[x+3][y-3]
                 ) {
                     return true        
                 }
@@ -93,7 +98,7 @@ const WeekFour = () => {
         return false
     };
 
-    const addPiece = (columnIndex) => {
+    const addPiece = (columnIndex: number) => {
         const column = gameState[columnIndex];
         const pos = column.indexOf(null);
         column[pos] = currentPlayer;
@@ -112,16 +117,17 @@ const WeekFour = () => {
     return (
             <div className="board">
                 <div>{winner && <h1>{winner} is the winner</h1>}</div>
+                <Button onClick={window.location.reload}>Reset</Button>
                 Current player is {currentPlayer}.
-                {Object.entries(gameState).map(([k,column], x) => {
+         {Object.entries(gameState).map(([k,column], x) => {
                     return <GameColumn column={column} index={x} onClick={() => addPiece(x)} />;
                 })}
-                <style jsx>{`
+                <style>{`
                     .board {
                         display: flex;
                         flex: 1;
                     }
-               `}</style>
+               `}</style>       
             </div>      
         );
     }
