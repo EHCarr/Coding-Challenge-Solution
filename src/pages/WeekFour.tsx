@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '@mantine/core';
+import { Button, Text } from '@mantine/core';
 
 const GameColumn = ({ column, index, onClick }: any) => {
     return (
@@ -101,9 +101,12 @@ const WeekFour = () => {
     };
 
     return (
+        <>
+            <Text  ta="center" size="xl" fw={700}>Current player is {currentPlayer}</Text>
+       
         <div className="board">
-            {winner && <h1>{winner} is the winner</h1>}
-            <div>Current player is {currentPlayer}.</div>
+            
+        
             {Object.entries(gameState).map(([k, column], x) => (
                 <GameColumn key={`column-${x}`} column={column} index={x} onClick={() => addPiece(x)} />
             ))}
@@ -117,8 +120,13 @@ const WeekFour = () => {
                     border-radius: 10px;
                 }
             `}</style>
-            <Button onClick={() => window.location.reload()}>Reset</Button>
+            
         </div>
+        <div>
+        <Text ta="center" size="xl" fw={700}>{winner && <h1>{winner} is the winner</h1>}</Text>
+        <Button  onClick={() => window.location.reload()}>Reset</Button>
+        </div>
+        </>
     );
 };
 
