@@ -26,13 +26,13 @@ const textStyle = {
 const WeekThree: React.FC = () => {
     const API_KEY = process.env.REACT_APP_API_KEY
     const BASE_URL = process.env.REACT_APP_BASE_URL
-    // const FORECAST_URL = process.env.REACT_APP_FORECAST_URL
+    const FORECAST_URL = process.env.REACT_APP_FORECAST_URL
 
     const [location, setLocation] = useState<string | null>('London');
     const [weatherData, setWeatherData] = useState<any>({});
     const [forecastData, setForecastData] = useState<ForecastDay[] | null>(null);
     const url = `${BASE_URL}${API_KEY}&q=${location}&aqi=no`;
-    const f_url = `http://api.weatherapi.com/v1/forecast.json?key=364bcae9a15b4d21843130218240904&q=${location}&days=7&aqi=no&alerts=no`;
+    const f_url = `${FORECAST_URL}${API_KEY}q=${location}&days=5&aqi=no&alerts=no`;
 
     console.log(url)
     console.log(f_url)
