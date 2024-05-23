@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Square from "./Square";
 import './tictactoe.css'
 type Player = 'X' | 'O' | "TIE" | null;
 
@@ -37,16 +36,6 @@ function Board() {
         setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? 'X': 'O');
     }
 
-    function setSquareValue(index: number) {
-        const newData = squares.map((val, i) =>     {           
-        if(i === index){
-            return currentPlayer;
-        }
-        return val;
-    });
-    setSquares(newData)
-    setCurrentPlayer(currentPlayer === "X" ? "O" : "X")
-    }
 
     useEffect(() => {
         const w = calculateWinner(squares)
@@ -56,7 +45,7 @@ function Board() {
         if(!w && !squares.filter((square) => !square).length){
             setWinner("TIE")
         }
-    })
+    },[squares])
 
     return (
         <div>
