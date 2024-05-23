@@ -14,15 +14,6 @@ interface ForecastDay {
   };
 }
 
-interface ForecastData {
-  forecastday: ForecastDay[];
-}
-
-const textStyle = {
-  fontStyle: 'italic'
-};
-
-
 const WeekThree: React.FC = () => {
     const API_KEY = process.env.REACT_APP_API_KEY
     const BASE_URL = process.env.REACT_APP_BASE_URL
@@ -54,7 +45,7 @@ const WeekThree: React.FC = () => {
               setForecastData(res.data.forecast.forecastday)
             })
           .catch(error => console.log(error))
-    },[location])
+    },[url,f_url,location])
 
   return (
     <Container size="sm">
