@@ -1,0 +1,10 @@
+.themeToggler {
+    position: fixed; /* Keeps it in the same position even when scrolling */
+    top: 10px; /* Adjust this value as needed */
+    right: 10px; /* Adjust this value as needed */
+    z-index: 1000; /* Ensures it stays on top of other content */
+
+}
+
+
+

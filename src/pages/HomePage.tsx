@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
   return (
     <Container size="lg" style={{ marginTop: '2rem' }}>
       <div>
-        <Text size="xl" style={{ marginBottom: '1rem', fontWeight: 500 }}>
+        <Text size="xl" style={{ marginBottom: '2rem', fontWeight: 500, textAlign: 'center'}}>
           Snake Charmers Coding Challenge
         </Text>
       </div>
