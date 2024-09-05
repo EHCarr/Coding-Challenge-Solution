@@ -5,15 +5,14 @@ import WeekOne from './pages/WeekOne';
 import WeekTwo from './pages/WeekTwo';
 import WeekThree from './pages/WeekThree';
 import WeekFour from './pages/WeekFour';
+
 const App: React.FC = () => {
   
- 
-
   return (
       <div>
-      <div className='themeToggler'>
-        <ThemeToggler /> 
-      </div>
+        <div className='themeToggler'>
+          <ThemeToggler /> 
+        </div>
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />} />

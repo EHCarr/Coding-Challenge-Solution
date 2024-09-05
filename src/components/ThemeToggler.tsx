@@ -28,4 +28,4 @@ const ThemeToggler: React.FC<{ children?: React.ReactNode }> = () => {
     )
 }
 
-export default ThemeToggler
+export default ThemeToggler;

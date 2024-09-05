@@ -1,6 +1,7 @@
 import React from 'react';
 import CardItem from '../components/Cards';
 import { Grid, Container, Text } from '@mantine/core';
+import Footer from '../components/Footer';
 
 const HomePage: React.FC = () => {
   const weeks = [
@@ -31,6 +32,7 @@ const HomePage: React.FC = () => {
           </Grid.Col>
         ))}
       </Grid>
+      <Footer/>
     </Container>
   );
 };
